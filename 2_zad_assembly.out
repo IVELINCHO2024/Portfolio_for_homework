@@ -1,0 +1,30 @@
+.LC0:
+        .string "\320\235\320\236\320\232 \320\275\320\260 \321\202\320\265\320\267\320\270 \320\264\320\262\320\265 \321\207\320\270\321\201\320\273\320\260 \320\265:%d"
+main:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 16
+        mov     DWORD PTR [rbp-8], 12
+        mov     DWORD PTR [rbp-12], 128
+        mov     eax, DWORD PTR [rbp-8]
+        mov     DWORD PTR [rbp-4], eax
+.L4:
+        mov     eax, DWORD PTR [rbp-4]
+        cdq
+        idiv    DWORD PTR [rbp-12]
+        mov     eax, edx
+        test    eax, eax
+        je      .L7
+        mov     eax, DWORD PTR [rbp-8]
+        add     DWORD PTR [rbp-4], eax
+        jmp     .L4
+.L7:
+        nop
+        mov     eax, DWORD PTR [rbp-4]
+        mov     esi, eax
+        mov     edi, OFFSET FLAT:.LC0
+        mov     eax, 0
+        call    printf
+        mov     eax, 0
+        leave
+        ret
